@@ -117,12 +117,46 @@ To get started, follow the [instructions][carthage-instructions] in Carthage's d
 To keep all those hundreds of source files ending up in the same directory, it's a good idea to set up some folder structure depending on your architecture. For instance, you can use the following:
 
     ├─ Models
-    ├─ Views
-    ├─ Controllers (or ViewModels, if your architecture is MVVM)
-    ├─ Stores
-    ├─ Helpers
+    ├─ Application // Not common views or controls, etc.
+    ├─ Main
+      ├─ Context A
+      ├─ Context B
+    ├─ Common
+      ├─ Views/Controls
+      ├─ Extensions
+      ├─ Context X
+    ├─ Assets
 
 First, create them as groups (little yellow "folders") within the group with your project's name in Xcode's Project Navigator. Then, for each of the groups, link them to an actual directory in your project path by opening their File Inspector on the right, hitting the little gray folder icon, and creating a new subfolder with the name of the group in your project directory.
+
+This is an example:
+
+    ├─ Models
+      ├─ User.swift // user model
+      ├─ Post.swift  // post model
+    ├─ Application
+      ├─ Main
+        ├─ AppDelegate.swift
+        ├─ MainViewController.swift // Maybe your app is wrapped in a main view controller, could be a tab bar controller subclass, or some custom ViewController that has neat functionality
+      ├─ Login
+        ├─ LoginManager.swift // business logic. A singleton that any controller in the app can interact with
+        ├─ LoginViewController.swift // view controller
+        ├─ LoginHeaderView.swift  // a view that only belongs to login
+      ├─ Feed
+        ├─ FeedViewController.swift
+        ├─ FeedTableViewCell.swift 
+      ├─ Common
+        ├─ Controls
+          ├─ BouncingButton.swift // UIControl subclass that is a button w/ bouncing physics. Just an example
+      ├─ Extensions
+        ├─ UIView+Additions.swift // useful additions to UIView
+        ├─ NSURL+Additions.swift // useful additions to NSURL
+    ├─ Assets
+      ├─ Images.xcassets
+      ├─ Sounds
+        ├─ success.wav
+      ├─ Videos
+        ├─ intro-onboarding.mp4
 
 #### Localization
 
